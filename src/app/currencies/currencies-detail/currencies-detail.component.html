@@ -1,0 +1,17 @@
+<div class="container">
+  <div *ngIf="isCurrencyAvailable()">
+    <ul><h2>Currency details</h2></ul>
+    <li> ID: {{currency.id}}</li>
+    <li> CODE: {{currency.attributes.code}}</li>
+    <li> NAME: {{currency.attributes.name}}</li>
+    <li> CURRENCY_TYPE: {{currency.attributes.currency_type}}</li>
+    <li> CODE_ISO_NUMERIC_3: {{currency.attributes.code_iso_numeric3}}</li>
+    <li> CODE_ISO_ALPHA3: {{currency.attributes.code_iso_alpha3}}</li>
+    <li> SYMBOL: {{currency.attributes.symbol}}</li>
+    <li> NATIVE_SYMBOL: {{currency.attributes.native_symbol}}</li>
+    <li> CATEGORY: {{currency.attributes.category}}</li>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="backToCurrencies()">back</button>
+  </div>
+</div>

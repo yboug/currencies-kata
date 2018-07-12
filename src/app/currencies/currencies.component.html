@@ -1,0 +1,49 @@
+<div class="container">
+  <h2 class="title"> Available Currencies </h2>
+  <div class="row">
+    <div class="col">
+      <label class="control">Filter currencies
+        <input type="text" class="input" placeholder="filter" [(ngModel)]="searchText">
+      </label>
+    </div>
+    <div class="col" ngbDropdown>
+      <button class="btn" id="filterDropDown" ngbDropdownToggle>{{filterAttribute}}</button>
+      <div ngbDropdownMenu aria-labelledby="filterDropDown">
+        <button class="dropdown-item" (click)="filterAttribute = 'id'">id</button>
+        <button class="dropdown-item" (click)="filterAttribute = 'code'">code</button>
+        <button class="dropdown-item" (click)="filterAttribute = 'name'">name</button>
+        <button class="dropdown-item" (click)="filterAttribute = 'type'">type</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let currency of currencies | paginate: {
+      itemsPerPage: pageSize,
+      currentPage: pageNumber,
+      totalItems: totalItems
+      } | currenciesFilter : searchText : filterAttribute"
+         class="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+      <div class="bg-dark text-white border border-primary mt-4">
+        <a [routerLink]="['/currency', currency.id]" routerLinkActive="active">
+          ID: {{currency.id}} Type: {{currency.attributes.currency_type}} Symbol: {{currency.attributes.symbol}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div calss="row">
+    <div class="has-text-centered">
+      <pagination-controls (pageChange)="pageChanged($event)">
+      </pagination-controls>
+    </div>
+    <div ngbDropdown>
+      <button class="btn btn-outline-primary" id="pageDropdown" ngbDropdownToggle>{{pageSize}}</button>
+      <div ngbDropdownMenu aria-labelledby="pageDropdown">
+        <button class="dropdown-item" (click)="setPageSize(10)">10</button>
+        <button class="dropdown-item" (click)="setPageSize(50)">50</button>
+        <button class="dropdown-item" (click)="setPageSize(100)">100</button>
+      </div>
+    </div>
+  </div>
+</div>
